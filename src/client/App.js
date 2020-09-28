@@ -1,27 +1,35 @@
 import React from 'react'
 import Box from '@material-ui/core/Box'
 import HideAppBar from './HOC/HideAppBar'
-import PlayerCard from './components/PlayerCard'
+import FutCard from './components/FutCard'
 import useFetch from './hooks/useFetch'
+import PlayerForm from './components/PlayerForm'
+import TeamForm from './components/TeamForm'
 
-const plyrsURL = 'http://localhost:4000/api/players'
-const tmsURL = 'http://localhost:4000/api/teams'
+const playersURL = 'http://localhost:4000/api/players'
+const teamsURL = 'http://localhost:4000/api/teams'
 
 export default function App(){
-  const [plyrsLoad,players] = useFetch(plyrsURL,[])
-  const [tmsLoad,teams] = useFetch(tmsURL,[])
+  const [playersLoad,players] = useFetch(playersURL,[])
+  const [teamsLoad,teams] = useFetch(teamsURL,[])
   return(
     <>
       <HideAppBar>
         <Box>
-          {players.map(item => 
-            <PlayerCard key={item._id} item={item} />
+          {playersLoad?'Loading...':
+            players.map(item =>
+              <FutCard key={item._id} item={item} />
           )}
+          <FutCard item={{nombre:'Leo',apellido:'Messi',edad:33,posicion:'delantero',equipo:'barcelona'}}/>
+          <PlayerForm/>
         </Box>
         <Box>
-          {teams.map(item => 
-            <div>{item.nombre}</div>
+          {teamsLoad?'Loading...':
+            teams.map(item =>
+              <FutCard key={item._id} item={item} />
           )}
+          <FutCard item={{nombre:'barcelona',jugadores:5}}/>
+          <TeamForm/>
         </Box>
       </HideAppBar>
     </>
