@@ -1,22 +1,19 @@
-import { useEffect,useState } from 'react'
+import {useState,useEffect} from 'react'
 
-export default function useFetch(url,dep){
-  const [load,setLoad] = useState(false)
-  const [dataFetched,setDataFetched] = useState([])
-  
-  useEffect(()=>{
-    fetch(url)
+export default function useFetch(URL){
+  const [data,setData] = useState()
+  const fetchData = (URL) =>{
+	return fetch(URL)
     .then(res=>res.json())
-    .then((res)=>{
-      setLoad(true)
-      setDataFetched(res.data)
+    .then(({data})=>{
+      setData(data)
     })
     .catch(err=>{
-      setLoad(false)
-      setDataFetched([])
       console.err(err)
     })
-  },dep)
-
-  return [load,dataFetched]
+  }
+  useEffect(()=>{
+  	fetchData(URL)
+  },[])
+  return [data,fetchData]
 }

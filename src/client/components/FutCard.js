@@ -50,7 +50,7 @@ export default function FutCard({item}) {
   return (
     <Card className={classes.root}>
       <CardContent className={classes.content}>
-        {item.jugadores?teamContent:playerContent}
+        {(item.jugadores)?teamContent:playerContent/*mejorar condicional*/}
       </CardContent>
       <CardActions>
         <Button size="small">

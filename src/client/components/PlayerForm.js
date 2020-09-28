@@ -21,12 +21,23 @@ const findPlayerData = ()=>{
   }
 }
 
-const handleSubmit=(data)=>{
-  console.log('enviando',data)
-}
 
-export default function PlayerForm() {
+export default function PlayerForm({URL,fetchData}) {
   //const classes = useStyles()
+  const handleSubmit=(data)=>{
+    fetch(URL, {
+      method: 'POST',
+      body:JSON.stringify(data),
+      headers: { 
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(()=>{
+      fetchData(URL)
+    })
+  }
+
   return (
     <Card>
       <CardContent>

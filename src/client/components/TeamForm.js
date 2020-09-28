@@ -9,23 +9,38 @@ import {FormControl,InputLabel,Input} from '@material-ui/core'
 //const useStyles = makeStyles({
 //
 //})
-//
+
 const findTeamData = ()=>{
-  return {nombre:document.getElementById('nombreEq').value}
+  return {
+    nombre:document.getElementById('nombreEq').value,
+    pais:document.getElementById('pais').value
+  }
 }
 
-const handleSubmit=(data)=>{
-  console.log('enviando',data)
-}
-
-export default function PlayerForm() {
-  //const classes = useStyles()
+export default function PlayerForm({URL,fetchData}) {
+  const handleSubmit=(data)=>{
+    fetch(URL, {
+      method: 'POST',
+      body:JSON.stringify(data),
+      headers: { 
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(res => res.json())
+    .then(()=>{
+      fetchData(URL)
+    })
+  }
   return (
     <Card>
       <CardContent>
         <FormControl>
           <InputLabel htmlFor="nombreEq">Equipo</InputLabel>
           <Input id="nombreEq" />
+        </FormControl>
+        <FormControl>
+          <InputLabel htmlFor="pais">Pais</InputLabel>
+          <Input id="pais" />
         </FormControl>
       </CardContent>
       <CardActions>
