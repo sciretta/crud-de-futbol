@@ -7,10 +7,6 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import {FormControl,InputLabel,Input} from '@material-ui/core'
 
-//const useStyles = makeStyles({
-//
-//})
-//
 const findPlayerData = ()=>{
   return {
     nombre:document.getElementById('nombreJug').value,
@@ -21,9 +17,7 @@ const findPlayerData = ()=>{
   }
 }
 
-
 export default function PlayerForm({URL,fetchData}) {
-  //const classes = useStyles()
   const handleSubmit=(data)=>{
     fetch(URL, {
       method: 'POST',
@@ -33,9 +27,7 @@ export default function PlayerForm({URL,fetchData}) {
       }
     })
     .then(res => res.json())
-    .then(()=>{
-      fetchData(URL)
-    })
+    .then(fetchData(URL))
   }
 
   return (

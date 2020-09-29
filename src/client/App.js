@@ -12,13 +12,14 @@ const teamsURL = 'http://localhost:4000/api/teams'
 export default function App(){
   const [players,fetchPlayers] = useFetch(playersURL)//utilizar context
   const [teams,fetchTeams] = useFetch(teamsURL)//utilizar context
+  
   return(
     <>
       <HideAppBar>
         <Box>
           {
             players?
-            players.map(item =><FutCard key={item._id} item={item}/>):
+            players.map(item =><FutCard key={item._id} item={item} URL={playersURL} fetchData={fetchPlayers}/>):
             'Loading...'
           }
           <PlayerForm URL={playersURL} fetchData={fetchPlayers}/>
@@ -26,7 +27,7 @@ export default function App(){
         <Box>
           {
             teams?
-            teams.map(item =><FutCard key={item._id} item={item}/>):
+            teams.map(item =><FutCard key={item._id} item={item} URL={teamsURL} fetchData={fetchTeams}/>):
             'Loading...'
           }
           <TeamForm URL={teamsURL} fetchData={fetchTeams}/>

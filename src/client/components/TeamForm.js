@@ -6,10 +6,6 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import {FormControl,InputLabel,Input} from '@material-ui/core'
 
-//const useStyles = makeStyles({
-//
-//})
-
 const findTeamData = ()=>{
   return {
     nombre:document.getElementById('nombreEq').value,
@@ -27,10 +23,9 @@ export default function PlayerForm({URL,fetchData}) {
       }
     })
     .then(res => res.json())
-    .then(()=>{
-      fetchData(URL)
-    })
+    .then(()=>{fetchData(URL)})
   }
+  
   return (
     <Card>
       <CardContent>

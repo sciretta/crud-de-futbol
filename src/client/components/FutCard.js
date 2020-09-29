@@ -26,8 +26,32 @@ const useStyles = makeStyles({
   }
 })
 
-export default function FutCard({item}) {
+export default function FutCard({item,URL,fetchData}) {
   const classes = useStyles()
+
+  const handleDelete = () =>{
+    if(item.jugadores){//arreglar condicional
+      fetch(URL, {
+        method: 'DELETE',
+        body:JSON.stringify(item),
+        headers: { 
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res => res.json())
+      .then(fetchData(URL))
+    }else{
+      fetch(URL, {
+        method: 'DELETE',
+        body:JSON.stringify(item),
+        headers: { 
+          'Content-Type': 'application/json'
+        }
+      })
+      .then(res =>res.json())
+      .then(fetchData(URL))
+    }
+  }
 
   const playerContent = (<>
     <Typography className={classes.title} color="textSecondary" >
@@ -53,7 +77,7 @@ export default function FutCard({item}) {
         {(item.jugadores)?teamContent:playerContent/*mejorar condicional*/}
       </CardContent>
       <CardActions>
-        <Button size="small">
+        <Button size="small" onClick={()=>handleDelete()}>
           <DeleteSweepIcon/>
         </Button>
       </CardActions>
