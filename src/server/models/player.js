@@ -1,6 +1,7 @@
 const {Schema,model} = require('mongoose');
 
 const playerSchema = new Schema({
+	tipo:{type:String,default:'JUGADOR'},
     nombre:{type:String,trim:true,default:''},
     apellido:{type:String,trim:true,default:''},
     edad:{type:Number},

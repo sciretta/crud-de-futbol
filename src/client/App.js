@@ -19,7 +19,7 @@ export default function App(){
         <Box>
           {
             players?
-            players.map(item =><FutCard key={item._id} item={item} URL={playersURL} fetchData={fetchPlayers}/>):
+            players.map(item =><FutCard key={item._id} item={{...item,tipo:'JUGADOR'}} URL={playersURL} fetchData={fetchPlayers}/>):
             'Loading...'
           }
           <PlayerForm URL={playersURL} fetchData={fetchPlayers}/>
@@ -27,7 +27,7 @@ export default function App(){
         <Box>
           {
             teams?
-            teams.map(item =><FutCard key={item._id} item={item} URL={teamsURL} fetchData={fetchTeams}/>):
+            teams.map(item =><FutCard key={item._id} item={{...item,tipo:'EQUIPO'}} URL={teamsURL} fetchData={fetchTeams}/>):
             'Loading...'
           }
           <TeamForm URL={teamsURL} fetchData={fetchTeams}/>

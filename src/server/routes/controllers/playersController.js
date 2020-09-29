@@ -55,10 +55,10 @@ exports.deletePlayer = async (req,res)=>{
     .then(res=>res.length-1)
 
     await Team.findOneAndUpdate({nombre:req.body.equipo},{jugadores:jugadores})
-
-    const player = await Player.findOneAndRemove(req.body)
+  
+    const player = await Player.findOneAndRemove(req.body.appelido)
     return res.status(200).json({
-      confirmarion:'succes',
+      confirmarion:'success',
       data:player
     })
   }catch(err){

@@ -30,7 +30,7 @@ export default function FutCard({item,URL,fetchData}) {
   const classes = useStyles()
 
   const handleDelete = () =>{
-    if(item.jugadores){//arreglar condicional
+    if(item.tipo==='EQUIPO'){//arreglar condicional
       fetch(URL, {
         method: 'DELETE',
         body:JSON.stringify(item),
@@ -74,7 +74,7 @@ export default function FutCard({item,URL,fetchData}) {
   return (
     <Card className={classes.root}>
       <CardContent className={classes.content}>
-        {item.jugadores?teamContent:playerContent/*mejorar condicional*/}
+        {item.tipo==='EQUIPO'?teamContent:playerContent/*mejorar condicional*/}
       </CardContent>
       <CardActions>
         <Button size="small" onClick={()=>handleDelete()}>
