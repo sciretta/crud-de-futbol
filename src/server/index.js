@@ -3,6 +3,7 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const app = express();
+require('colors');
 
 function getRootURL(folder){
   let URL='';
@@ -27,7 +28,7 @@ app.use(express.static(getRootURL('public')));
 app.set('port',4000);
 
 app.listen(app.get('port'),()=>{
-  console.log('servidor inicializado');
+  console.log('Servidor inicializado.'.bgGreen.black);
 });
 
 app.use('/api/players',require('./routes/players.routes'));

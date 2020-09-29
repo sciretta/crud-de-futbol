@@ -74,7 +74,7 @@ export default function FutCard({item,URL,fetchData}) {
   return (
     <Card className={classes.root}>
       <CardContent className={classes.content}>
-        {(item.jugadores)?teamContent:playerContent/*mejorar condicional*/}
+        {item.jugadores?teamContent:playerContent/*mejorar condicional*/}
       </CardContent>
       <CardActions>
         <Button size="small" onClick={()=>handleDelete()}>
