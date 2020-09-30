@@ -13,7 +13,15 @@ const findTeamData = ()=>{
   }
 }
 
+const useStyles = makeStyles(theme=>({
+  card:{
+    display:'flex'
+  }
+}))
+
 export default function PlayerForm({URL,fetchData}) {
+  const classes = useStyles()
+
   const handleSubmit=(data)=>{
     fetch(URL, {
       method: 'POST',
@@ -27,12 +35,14 @@ export default function PlayerForm({URL,fetchData}) {
   }
   
   return (
-    <Card>
+    <Card className={classes.card}>
       <CardContent>
         <FormControl>
           <InputLabel htmlFor="nombreEq">Equipo</InputLabel>
           <Input id="nombreEq" />
         </FormControl>
+      </CardContent>
+      <CardContent>
         <FormControl>
           <InputLabel htmlFor="pais">Pais</InputLabel>
           <Input id="pais" />

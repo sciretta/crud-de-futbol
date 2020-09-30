@@ -5,6 +5,8 @@ import HideAppBar from './HOC/HideAppBar'
 import FutCard from './components/FutCard'
 import PlayerForm from './components/PlayerForm'
 import TeamForm from './components/TeamForm'
+import { grey } from '@material-ui/core/colors';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 
 const playersURL = 'http://localhost:4000/api/players'
 const teamsURL = 'http://localhost:4000/api/teams'
@@ -13,8 +15,29 @@ export default function App(){
   const [players,fetchPlayers] = useFetch(playersURL)//utilizar context
   const [teams,fetchTeams] = useFetch(teamsURL)//utilizar context
   
+  const darkTheme = createMuiTheme({
+    palette:{
+      background:{
+        default:grey[900],
+        paper:grey[700],
+        header:'black'
+      },
+      buttons:{
+        default:grey[800],
+        active:grey[50],
+        hover:grey[900]
+      },
+      text:{
+        primary:grey[50],
+        secondary:grey[300],
+        disabled:grey[400]
+      },
+      divider:'black'
+    }
+  })
+
   return(
-    <>
+    <ThemeProvider theme={darkTheme}>
       <HideAppBar>
         <Box>
           {
@@ -33,6 +56,6 @@ export default function App(){
           <TeamForm URL={teamsURL} fetchData={fetchTeams}/>
         </Box>
       </HideAppBar>
-    </>
+    </ThemeProvider>
   )
 }

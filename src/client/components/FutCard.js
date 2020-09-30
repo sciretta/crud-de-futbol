@@ -5,9 +5,9 @@ import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import DeleteSweepIcon from '@material-ui/icons/DeleteSweep';
+import DeleteSweepIcon from '@material-ui/icons/DeleteSweep'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme=>({
   root: {
     minWidth:'50px',
     marginTop:'5px',
@@ -21,10 +21,16 @@ const useStyles = makeStyles({
     padding:'5px 0',
     margin:'none'
   },
-  content:{
-    margin:'none'
+  delete:{
+    color:'black',
+    '&:active':{
+      color:theme.palette.buttons.active
+    },
+    '&:hover':{
+      color:theme.palette.buttons.hover
+    }
   }
-})
+}))
 
 export default function FutCard({item,URL,fetchData}) {
   const classes = useStyles()
@@ -54,19 +60,19 @@ export default function FutCard({item,URL,fetchData}) {
   }
 
   const playerContent = (<>
-    <Typography className={classes.title} color="textSecondary" >
+    <Typography className={classes.title} >
       {`${item.nombre} ${item.apellido}, ${item.edad}`}
     </Typography>
-    <Typography variant="body2" component="p" gutterBottom >
+    <Typography variant="body2" color="textSecondary" component="p" >
       {`${item.equipo}, ${item.posicion}`}
     </Typography>
   </>)
 
   const teamContent = (<>
-    <Typography className={classes.title} color="textSecondary" >
-      {`${item.nombre}`}
+    <Typography className={classes.title} >
+      {`${item.nombre}, ${item.pais}`}
     </Typography>
-    <Typography variant="body2" component="p" gutterBottom >
+    <Typography variant="body2" color="textSecondary" component="p">
       {`Jugadores: ${item.jugadores}`}
     </Typography>
   </>)
@@ -77,7 +83,7 @@ export default function FutCard({item,URL,fetchData}) {
         {item.tipo==='EQUIPO'?teamContent:playerContent}
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={()=>handleDelete()}>
+        <Button size="small" className={classes.delete} onClick={()=>handleDelete()}>
           <DeleteSweepIcon/>
         </Button>
       </CardActions>

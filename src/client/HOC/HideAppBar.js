@@ -18,14 +18,16 @@ function HideOnScroll(props) {
   )
 }
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme=>({
   root:{
-    boxShadow:'none'
+    boxShadow:'none',
+    background:theme.palette.background.header
   },
   title:{
     display:'flex',
     flexGrow:1,
-    justifyContent:'center'
+    justifyContent:'center',
+    color:theme.palette.text.primary
   },
   wrap:{
     display:'grid',
@@ -35,7 +37,7 @@ const useStyles = makeStyles({
     paddingLeft:'7vw',
     paddinRight:'7vw'
   }
-});
+}))
 
 export default function HideAppBar(props) {
   const styles = useStyles()
