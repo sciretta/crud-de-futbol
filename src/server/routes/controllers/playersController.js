@@ -53,10 +53,11 @@ exports.deletePlayer = async (req,res)=>{
   try{
     const jugadores = await Player.find({equipo:req.body.equipo})
     .then(res=>res.length-1)
-
+    
     await Team.findOneAndUpdate({nombre:req.body.equipo},{jugadores:jugadores})
-  
-    const player = await Player.findOneAndRemove(req.body.appelido)
+    
+    const player = await Player.findByIdAndRemove(req.body._id)
+    
     return res.status(200).json({
       confirmarion:'success',
       data:player
