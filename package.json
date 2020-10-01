@@ -8,7 +8,8 @@
     "dev": "concurrently \"npm run webpack\" \"npm run server\"",
     "webpack": "webpack --watch",
     "build": "webpack --config production.config.js",
-    "server": "nodemon src/server/index.js"
+    "server": "nodemon src/server/index.js",
+    "devClient":"webpack-dev-server --open"
   },
   "author": "",
   "license": "ISC",
@@ -32,6 +33,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "webpack": "^4.44.2",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0"
   }
 }

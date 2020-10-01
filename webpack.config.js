@@ -8,6 +8,11 @@ module.exports = {
     path: path.resolve(__dirname, 'public'),
     filename: 'bundle.js'
   },
+  devServer: {
+    contentBase: path.join(__dirname, 'public'),
+    compress: true,
+    port: 9000
+  },
   module:{
     rules: [
       {
