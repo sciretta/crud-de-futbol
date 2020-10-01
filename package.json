@@ -9,7 +9,7 @@
     "webpack": "webpack --watch",
     "build": "webpack --config production.config.js",
     "server": "nodemon src/server/index.js",
-    "devClient":"webpack-dev-server --open"
+    "client":"webpack-dev-server --open"
   },
   "author": "",
   "license": "ISC",

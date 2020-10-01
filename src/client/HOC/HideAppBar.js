@@ -40,19 +40,19 @@ const useStyles = makeStyles(theme=>({
 }))
 
 export default function HideAppBar(props) {
-  const styles = useStyles()
+  const { root,title,wrap } = useStyles()
   return (
     <>
       <CssBaseline />
       <HideOnScroll {...props}>
-        <AppBar className={styles.root}>
+        <AppBar className={root}>
           <Toolbar>
-            <Typography className={styles.title} variant="h3">CRUD de Futbol.</Typography>
+            <Typography className={title} variant="h3">CRUD de Futbol.</Typography>
           </Toolbar>
         </AppBar>
       </HideOnScroll>
       <Toolbar />
-      <Container className={styles.wrap}>
+      <Container className={wrap}>
         {props.children}
       </Container>
     </>

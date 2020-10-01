@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme=>({
     margin:'none'
   },
   delete:{
-    color:'black',
+    color:theme.primary,
     '&:active':{
       color:theme.palette.buttons.active
     },

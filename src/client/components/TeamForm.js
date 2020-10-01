@@ -5,6 +5,8 @@ import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import {FormControl,InputLabel,Input} from '@material-ui/core'
+import SendIcon from '@material-ui/icons/Send';
+import TextField from '@material-ui/core/TextField'
 
 const findTeamData = ()=>{
   return {
@@ -14,13 +16,22 @@ const findTeamData = ()=>{
 }
 
 const useStyles = makeStyles(theme=>({
-  card:{
-    display:'flex'
+  wrap:{
+    display:'flex',
+    padding:theme.padding,
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  fields:{
+    width:'15vw',
+    '&:active':{
+      borderColor:theme.primary
+    }
   }
 }))
 
 export default function PlayerForm({URL,fetchData}) {
-  const classes = useStyles()
+  const {fields,wrap} = useStyles()
 
   const handleSubmit=(data)=>{
     fetch(URL, {
@@ -35,22 +46,12 @@ export default function PlayerForm({URL,fetchData}) {
   }
   
   return (
-    <Card className={classes.card}>
-      <CardContent>
-        <FormControl>
-          <InputLabel htmlFor="nombreEq">Equipo</InputLabel>
-          <Input id="nombreEq" />
-        </FormControl>
-      </CardContent>
-      <CardContent>
-        <FormControl>
-          <InputLabel htmlFor="pais">Pais</InputLabel>
-          <Input id="pais" />
-        </FormControl>
-      </CardContent>
-      <CardActions>
-        <Button onClick={()=>handleSubmit(findTeamData())}>Enviar</Button>
-      </CardActions>
+    <Card className={wrap}>
+      <TextField className={fields} id="nombreEq" label="Equipo"variant="outlined"/>
+      <TextField className={fields} id="pais" label="Pais" variant="outlined"/>
+      <Button onClick={()=>handleSubmit(findTeamData())}>
+        <SendIcon/>
+      </Button>
     </Card>
   )
 }

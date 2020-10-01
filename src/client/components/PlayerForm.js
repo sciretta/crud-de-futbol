@@ -6,6 +6,8 @@ import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 import {FormControl,InputLabel,Input} from '@material-ui/core'
+import TextField from '@material-ui/core/TextField'
+import SendIcon from '@material-ui/icons/Send'
 
 const findPlayerData = ()=>{
   return {
@@ -17,7 +19,28 @@ const findPlayerData = ()=>{
   }
 }
 
+const useStyles = makeStyles(theme=>({
+  wrap:{
+    display:'flex',
+    flexDirection:'column',
+    justifyContent:'center',
+    alignItems:'center'
+  },
+  content:{
+    display:'flex',
+    padding:theme.padding,
+    justifyContent:'space-beetween'
+  },
+  fields:{
+    width:'14vw',
+    '&:active':{
+      borderColor:theme.primary
+    }
+  }
+}))
+
 export default function PlayerForm({URL,fetchData}) {
+  const { wrap,content,fields } = useStyles()
   const handleSubmit=(data)=>{
     fetch(URL, {
       method: 'POST',
@@ -31,34 +54,19 @@ export default function PlayerForm({URL,fetchData}) {
   }
 
   return (
-    <Card>
-      <CardContent>
-        <FormControl>
-          <InputLabel htmlFor="nombreJug">Nombre</InputLabel>
-          <Input id="nombreJug" />
-        </FormControl>
-        <FormControl>
-          <InputLabel htmlFor="apellido">Apellido</InputLabel>
-          <Input id="apellido" />
-        </FormControl>
-        <FormControl>
-          <InputLabel htmlFor="edad">Edad</InputLabel>
-          <Input id="edad" />
-        </FormControl>
+    <Card className={wrap}>
+      <CardContent className={content}>
+        <TextField className={fields} id="nombreJug" label="Nombre" variant="outlined"/>
+        <TextField className={fields} id="apellido" label="Apellido" variant="outlined"/>
+        <TextField className={fields} id="edad" label="Edad" variant="outlined"/>
       </CardContent>
-      <CardContent>
-        <FormControl>
-          <InputLabel htmlFor="posicion">posicion</InputLabel>
-          <Input id="posicion" />
-        </FormControl>
-        <FormControl>
-          <InputLabel htmlFor="equipo">equipo</InputLabel>
-          <Input id="equipo" />
-        </FormControl>
+      <CardContent className={content}>
+        <TextField className={fields} id="equipo" label="Equipo" variant="outlined"/>
+        <TextField className={fields} id="posicion" label="Posicion" variant="outlined"/>
+        <Button onClick={()=>handleSubmit(findPlayerData())} >
+          <SendIcon/>
+        </Button>
       </CardContent>
-      <CardActions>
-        <Button onClick={()=>handleSubmit(findPlayerData())} >Enviar</Button>
-      </CardActions>
     </Card>
   )
 }
