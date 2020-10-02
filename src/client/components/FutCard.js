@@ -1,5 +1,5 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
+import makeStyles from '@material-ui/core/styles/makeStyles'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
@@ -9,7 +9,6 @@ import DeleteSweepIcon from '@material-ui/icons/DeleteSweep'
 
 const useStyles = makeStyles(theme=>({
   root: {
-    minWidth:'50px',
     marginTop:'5px',
     marginBottom:'5px',
     display:'flex',
@@ -17,18 +16,8 @@ const useStyles = makeStyles(theme=>({
     justifyContent:'space-around'
   },
   title: {
-    fontSize: 14,
     padding:'5px 0',
     margin:'none'
-  },
-  delete:{
-    color:theme.primary,
-    '&:active':{
-      color:theme.palette.buttons.active
-    },
-    '&:hover':{
-      color:theme.palette.buttons.hover
-    }
   }
 }))
 
@@ -83,7 +72,7 @@ export default function FutCard({item,URL,fetchData}) {
         {item.tipo==='EQUIPO'?teamContent:playerContent}
       </CardContent>
       <CardActions>
-        <Button size="small" className={classes.delete} onClick={()=>handleDelete()}>
+        <Button size="small" onClick={()=>handleDelete()}>
           <DeleteSweepIcon/>
         </Button>
       </CardActions>
