@@ -28,7 +28,7 @@ app.use(express.static(getRootURL('public')));
 app.set('port',4000);
 
 app.listen(app.get('port'),()=>{
-  console.log('Servidor inicializado.'.bgGreen.black);
+  console.log(`Servidor inicializado en el puerto ${app.get('port')}.`.bgGreen.black);
 });
 
 app.use('/api/players',require('./routes/players.routes'));
