@@ -5,17 +5,14 @@ import HideAppBar from './layouts/HideAppBar'
 import FutCard from './components/FutCard'
 import PlayerForm from './components/PlayerForm'
 import TeamForm from './components/TeamForm'
+import Loading from './components/Loading'
 import Grid from '@material-ui/core/Grid'
-import Box from '@material-ui/core/Box'
-import Typography from '@material-ui/core/Typography'
-import Skeleton from '@material-ui/lab/Skeleton'
 import blueGrey from '@material-ui/core/colors/blueGrey'
 import grey from '@material-ui/core/colors/grey'
 import red from '@material-ui/core/colors/red'
 
 const playersURL = 'http://localhost:4000/api/players'
 const teamsURL = 'http://localhost:4000/api/teams'
-
 
 const darkTheme = createMuiTheme({
   palette:{
@@ -53,11 +50,7 @@ export default function App(){
           {
             players?
             players.map(item =><FutCard key={item._id} item={{...item,tipo:'JUGADOR'}} URL={playersURL} fetchData={fetchPlayers}/>):
-            <Typography component='div' variant='h2'>
-              <Skeleton variant='rect'>
-                Loading...
-              </Skeleton>
-            </Typography>
+            [...new Array(3)].map((item,index)=><Loading key={index}/>)
           }
           <PlayerForm URL={playersURL} fetchData={fetchPlayers}/>
         </Grid>
@@ -65,11 +58,7 @@ export default function App(){
           {
             teams?
             teams.map(item =><FutCard key={item._id} item={{...item,tipo:'EQUIPO'}} URL={teamsURL} fetchData={fetchTeams}/>):
-            <Typography component='div' variant='h2'>
-              <Skeleton variant='rect'>
-                Loading...
-              </Skeleton>
-            </Typography>
+            [...new Array(3)].map((item,index)=><Loading key={index}/>)
           }
           <TeamForm URL={teamsURL} fetchData={fetchTeams}/>
         </Grid>

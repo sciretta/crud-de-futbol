@@ -22,7 +22,8 @@ function HideOnScroll(props) {
 const useStyles = makeStyles(theme=>({
   root:{
     boxShadow:'none',
-    background:theme.palette.background.header
+    background:theme.palette.background.header,
+    color:theme.palette.text.primary
   },
   title:{
     display:'flex',
@@ -40,7 +41,7 @@ export default function HideAppBar(props) {
       <HideOnScroll {...props}>
         <AppBar className={root}>
           <Toolbar>
-            <Typography className={title} variant="h3">CRUD de Futbol.</Typography>
+            <Typography className={title} variant="h3">Crud de futbol</Typography>
           </Toolbar>
         </AppBar>
       </HideOnScroll>

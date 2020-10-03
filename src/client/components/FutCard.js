@@ -6,6 +6,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import DeleteSweepIcon from '@material-ui/icons/DeleteSweep'
+import handleDelete from '../handles/handleDelete'
 
 const useStyles = makeStyles(theme=>({
   root: {
@@ -13,7 +14,7 @@ const useStyles = makeStyles(theme=>({
     marginBottom:'5px',
     display:'flex',
     flexDirection:'row',
-    justifyContent:'space-around'
+    justifyContent:'space-beetween'
   },
   title: {
     padding:'5px 0',
@@ -23,30 +24,6 @@ const useStyles = makeStyles(theme=>({
 
 export default function FutCard({item,URL,fetchData}) {
   const classes = useStyles()
-
-  const handleDelete = () =>{
-    if(item.tipo==='EQUIPO'){
-      fetch(URL, {
-        method: 'DELETE',
-        body:JSON.stringify(item),
-        headers: { 
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(res => res.json())
-      .then(fetchData(URL))
-    }else{
-      fetch(URL, {
-        method: 'DELETE',
-        body:JSON.stringify(item),
-        headers: { 
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(res =>res.json())
-      .then(fetchData(URL))
-    }
-  }
 
   const playerContent = (<>
     <Typography className={classes.title} >
@@ -72,7 +49,7 @@ export default function FutCard({item,URL,fetchData}) {
         {item.tipo==='EQUIPO'?teamContent:playerContent}
       </CardContent>
       <CardActions>
-        <Button size="small" onClick={()=>handleDelete()}>
+        <Button size="small" onClick={()=>handleDelete(URL,fetchData,item)}>
           <DeleteSweepIcon/>
         </Button>
       </CardActions>
