@@ -18,10 +18,10 @@ const useStyles = makeStyles(theme=>({
 export default function Loading(){
   const { root,skeleton } = useStyles()
   return(<>
-	<Card className={root}>
-      <Skeleton variant='rect' className={skeleton} animation='wave' height={50}/>
-      <Divider/>
-      <Skeleton variant='rect' className={skeleton} animation='wave' height={30}/>
-	</Card>
+  	<Card className={root}>
+        <Skeleton variant='rect' className={skeleton} animation='wave' height={50}/>
+        <Divider/>
+        <Skeleton variant='rect' className={skeleton} animation='wave' height={30}/>
+  	</Card>
   </>)
 }

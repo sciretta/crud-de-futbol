@@ -10,23 +10,20 @@ import handleDelete from '../handles/handleDelete'
 
 const useStyles = makeStyles(theme=>({
   root: {
-    marginTop:'5px',
-    marginBottom:'5px',
+    margin:'5px 0',
     display:'flex',
-    flexDirection:'row',
-    justifyContent:'space-beetween'
+    justifyContent:'space-between'
   },
   title: {
-    padding:'5px 0',
-    margin:'none'
+    padding:'5px 0'
   }
 }))
 
 export default function FutCard({item,URL,fetchData}) {
-  const classes = useStyles()
+  const { root,title } = useStyles()
 
   const playerContent = (<>
-    <Typography className={classes.title} >
+    <Typography className={title} >
       {`${item.nombre} ${item.apellido}, ${item.edad}`}
     </Typography>
     <Typography variant="body2" color="textSecondary" component="p" >
@@ -35,7 +32,7 @@ export default function FutCard({item,URL,fetchData}) {
   </>)
 
   const teamContent = (<>
-    <Typography className={classes.title} >
+    <Typography className={title} >
       {`${item.nombre}, ${item.pais}`}
     </Typography>
     <Typography variant="body2" color="textSecondary" component="p">
@@ -44,8 +41,8 @@ export default function FutCard({item,URL,fetchData}) {
   </>)
   
   return (
-    <Card className={classes.root}>
-      <CardContent className={classes.content}>
+    <Card className={root}>
+      <CardContent>
         {item.tipo==='EQUIPO'?teamContent:playerContent}
       </CardContent>
       <CardActions>

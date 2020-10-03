@@ -7,15 +7,7 @@ import CardContent from '@material-ui/core/CardContent'
 import TextField from '@material-ui/core/TextField'
 import MenuItem from '@material-ui/core/MenuItem'
 import SendIcon from '@material-ui/icons/Send'
-
-const findPlayerData = ()=>{
-  return {
-    nombre:document.getElementById('nombreJug').value,
-    apellido:document.getElementById('apellido').value,
-    edad:document.getElementById('edad').value,
-    equipo:document.getElementById('equipo').value
-  }
-}
+import handleSubmit from '../handles/handleSubmit'
 
 const useStyles = makeStyles(theme=>({
   wrap:{
@@ -24,7 +16,7 @@ const useStyles = makeStyles(theme=>({
   },
   content:{
     display:'flex',
-    padding:theme.padding,
+    padding:'8px 0',
     justifyContent:'space-between'
   },
   fields:{
@@ -40,25 +32,6 @@ export default function PlayerForm({URL,fetchData}) {
   const { wrap,content,fields } = useStyles()
   const [ error,setError ] = useState(false)
   const [ posicion,setPosicion ] = useState('')
-
-  const handleSubmit=(data)=>{
-    const { nombre,apellido,edad,equipo } = data
-    if(nombre && apellido && edad && posicion && equipo){
-      fetch(URL, {
-        method: 'POST',
-        body:JSON.stringify({...data,posicion}),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-      .then(res => res.json())
-      .then(fetchData(URL))
-      setError(false)
-    }else{
-      setError(true)
-      setTimeout(()=>setError(false),1000)
-    }
-  }
 
   return (
     <Card className={wrap}>
@@ -76,7 +49,7 @@ export default function PlayerForm({URL,fetchData}) {
             </MenuItem>
           ))}
         </TextField>
-        <Button className={fields} onClick={()=>handleSubmit(findPlayerData())} >
+        <Button className={fields} onClick={()=>handleSubmit('PLAYER',setError,URL,fetchData,{posicion})} >
           <SendIcon color={error?'disabled':'inherit'}/>
         </Button>
       </CardContent>

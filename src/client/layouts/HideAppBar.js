@@ -4,10 +4,9 @@ import Toolbar from '@material-ui/core/Toolbar'
 import Typography from '@material-ui/core/Typography'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
-import Container from '@material-ui/core/Container'
 import Slide from '@material-ui/core/Slide'
 import Grid from '@material-ui/core/Grid'
-import {makeStyles} from '@material-ui/core/styles'
+import makeStyles from '@material-ui/core/styles/makeStyles'
 
 function HideOnScroll(props) {
   const { children, window } = props
@@ -46,11 +45,9 @@ export default function HideAppBar(props) {
         </AppBar>
       </HideOnScroll>
       <Toolbar />
-      <Container>
-        <Grid container spacing={2}>
-          {props.children}
-        </Grid>
-      </Container>
+      <Grid container spacing={3} justify='center'>
+        {props.children}
+      </Grid>
     </>
   )
 }

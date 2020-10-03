@@ -7,6 +7,7 @@ import PlayerForm from './components/PlayerForm'
 import TeamForm from './components/TeamForm'
 import Loading from './components/Loading'
 import Grid from '@material-ui/core/Grid'
+import Hidden from '@material-ui/core/Hidden'
 import blueGrey from '@material-ui/core/colors/blueGrey'
 import grey from '@material-ui/core/colors/grey'
 import red from '@material-ui/core/colors/red'
@@ -35,8 +36,7 @@ const darkTheme = createMuiTheme({
       main:grey[900]
     },
     secondary:red
-  },
-  padding:'10px'
+  }
 })
 
 export default function App(){
@@ -46,21 +46,25 @@ export default function App(){
   return(
     <ThemeProvider theme={darkTheme}>
       <HideAppBar>
-        <Grid item lg={6} md={6} sm={6} xs={12}>
-          {
-            players?
-            players.map(item =><FutCard key={item._id} item={{...item,tipo:'JUGADOR'}} URL={playersURL} fetchData={fetchPlayers}/>):
-            [...new Array(3)].map((item,index)=><Loading key={index}/>)
-          }
-          <PlayerForm URL={playersURL} fetchData={fetchPlayers}/>
+        <Grid item lg={5} md={5} sm={6} xs={12}>
+          <Hidden>
+            {
+              players?
+              players.map(item =><FutCard key={item._id} item={{...item,tipo:'JUGADOR'}} URL={playersURL} fetchData={fetchPlayers}/>):
+              [...new Array(3)].map((item,index)=><Loading key={index}/>)
+            }
+            <PlayerForm URL={playersURL} fetchData={fetchPlayers}/>
+          </Hidden>
         </Grid>
-        <Grid item lg={6} md={6} sm={6} xs={12}>
-          {
-            teams?
-            teams.map(item =><FutCard key={item._id} item={{...item,tipo:'EQUIPO'}} URL={teamsURL} fetchData={fetchTeams}/>):
-            [...new Array(3)].map((item,index)=><Loading key={index}/>)
-          }
-          <TeamForm URL={teamsURL} fetchData={fetchTeams}/>
+        <Grid item lg={5} md={5} sm={6} xs={12}>
+          <Hidden xsDown>
+            {
+              teams?
+              teams.map(item =><FutCard key={item._id} item={{...item,tipo:'EQUIPO'}} URL={teamsURL} fetchData={fetchTeams}/>):
+              [...new Array(3)].map((item,index)=><Loading key={index}/>)
+            }
+            <TeamForm URL={teamsURL} fetchData={fetchTeams}/>
+          </Hidden>
         </Grid>
       </HideAppBar>
     </ThemeProvider>
