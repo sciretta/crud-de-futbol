@@ -40,12 +40,12 @@ export default function HideAppBar(props) {
       <HideOnScroll {...props}>
         <AppBar className={root}>
           <Toolbar>
-            <Typography className={title} variant="h3">Crud de futbol</Typography>
+            <Typography className={title} variant={"h3"}>Crud de futbol</Typography>
           </Toolbar>
         </AppBar>
       </HideOnScroll>
       <Toolbar />
-      <Grid container spacing={3} justify='center'>
+      <Grid container spacing={3} justify={'center'}>
         {props.children}
       </Grid>
     </>

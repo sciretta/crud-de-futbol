@@ -1,4 +1,5 @@
 import React from 'react'
+import {useState} from 'react'
 import useFetch from './hooks/useFetch'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
 import HideAppBar from './layouts/HideAppBar'
@@ -6,6 +7,8 @@ import FutCard from './components/FutCard'
 import PlayerForm from './components/PlayerForm'
 import TeamForm from './components/TeamForm'
 import Loading from './components/Loading'
+import Button from '@material-ui/core/Button'
+import ButtonGroup from '@material-ui/core/ButtonGroup'
 import Grid from '@material-ui/core/Grid'
 import Hidden from '@material-ui/core/Hidden'
 import blueGrey from '@material-ui/core/colors/blueGrey'
@@ -39,15 +42,28 @@ const darkTheme = createMuiTheme({
   }
 })
 
-export default function App(){
+const App = ()=>{
   const [players,fetchPlayers] = useFetch(playersURL)
   const [teams,fetchTeams] = useFetch(teamsURL)
-
+  const [clicked,setClicked] = useState(true)
+  console.log('renderizando app')
   return(
     <ThemeProvider theme={darkTheme}>
       <HideAppBar>
-        <Grid item lg={5} md={5} sm={6} xs={12}>
-          <Hidden>
+        <Grid item xs={12}>
+          <Hidden only={['sm','md','lg']}>
+            <ButtonGroup variant="text" fullWidth={true}>
+              <Button disabled={!clicked} variant='contained' color='primary' onClick={()=>setClicked(false)}>
+                PLAYERS
+              </Button>
+              <Button disabled={clicked} variant='contained' color='primary' onClick={()=>setClicked(true)}>
+                TEAMS
+              </Button>
+            </ButtonGroup>
+          </Hidden>
+        </Grid>
+        <Grid item lg={5} md={5} sm={5} xs={11}>
+          <Hidden xsDown={clicked}>
             {
               players?
               players.map(item =><FutCard key={item._id} item={{...item,tipo:'JUGADOR'}} URL={playersURL} fetchData={fetchPlayers}/>):
@@ -56,8 +72,8 @@ export default function App(){
             <PlayerForm URL={playersURL} fetchData={fetchPlayers}/>
           </Hidden>
         </Grid>
-        <Grid item lg={5} md={5} sm={6} xs={12}>
-          <Hidden xsDown>
+        <Grid item lg={5} md={5} sm={5} xs={11}>
+          <Hidden xsDown={!clicked}>
             {
               teams?
               teams.map(item =><FutCard key={item._id} item={{...item,tipo:'EQUIPO'}} URL={teamsURL} fetchData={fetchTeams}/>):
@@ -70,3 +86,5 @@ export default function App(){
     </ThemeProvider>
   )
 }
+
+export default App
