@@ -12,7 +12,7 @@ function HideOnScroll(props) {
   const { children, window } = props
   const trigger = useScrollTrigger({ target: window ? window() : undefined })
   return (
-    <Slide appear={false} direction="down" in={!trigger}>
+    <Slide appear={false} direction={"down"} in={!trigger}>
       {children}
     </Slide>
   )
@@ -20,20 +20,17 @@ function HideOnScroll(props) {
 
 const useStyles = makeStyles(theme=>({
   root:{
-    boxShadow:'none',
-    background:theme.palette.background.header,
-    color:theme.palette.text.primary
+    boxShadow:'none'
   },
   title:{
     display:'flex',
     flexGrow:1,
-    justifyContent:'center',
-    color:theme.palette.text.primary
+    justifyContent:'center'
   }
 }))
 
 export default function HideAppBar(props) {
-  const { root,title,wrap } = useStyles()
+  const { root,title,wrap,background } = useStyles()
   return (
     <>
       <CssBaseline />
@@ -41,11 +38,12 @@ export default function HideAppBar(props) {
         <AppBar className={root}>
           <Toolbar>
             <Typography className={title} variant={"h3"}>Crud de futbol</Typography>
+            {props.switch}
           </Toolbar>
         </AppBar>
       </HideOnScroll>
       <Toolbar />
-      <Grid container spacing={3} justify={'center'}>
+      <Grid container spacing={3} justify={"center"}>
         {props.children}
       </Grid>
     </>

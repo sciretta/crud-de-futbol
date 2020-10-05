@@ -7,6 +7,7 @@ import FutCard from './components/FutCard'
 import PlayerForm from './components/PlayerForm'
 import TeamForm from './components/TeamForm'
 import Loading from './components/Loading'
+import Switch from '@material-ui/core/Switch'
 import Button from '@material-ui/core/Button'
 import ButtonGroup from '@material-ui/core/ButtonGroup'
 import Grid from '@material-ui/core/Grid'
@@ -21,42 +22,44 @@ const teamsURL = 'http://localhost:4000/api/teams'
 const darkTheme = createMuiTheme({
   palette:{
     background:{
-      default:grey[900],
-      paper:blueGrey[500],
-      header:blueGrey[800]
-    },
-    buttons:{
-      default:grey[800],
-      active:grey[50],
-      hover:grey[900]
-    },
-    text:{
-      primary:grey[50],
-      secondary:grey[300],
-      disabled:grey[400]
+      paper:blueGrey[500]
     },
     primary:{
-      main:grey[900]
+      main:blueGrey[100]
     },
     secondary:red
   }
 })
 
-const App = ()=>{
+const lightTheme = createMuiTheme({
+  palette:{
+    type:'light',
+    background:{
+      default:'#fafafa',
+      paper:'#ffffff'
+    },
+    primary:{
+      main:blueGrey[50]
+    },
+    secondary:red
+  }
+})
+
+export default function App (){
   const [players,fetchPlayers] = useFetch(playersURL)
   const [teams,fetchTeams] = useFetch(teamsURL)
   const [clicked,setClicked] = useState(true)
-  console.log('renderizando app')
+  const [darkMode,setDarkMode] = useState(false)
   return(
-    <ThemeProvider theme={darkTheme}>
-      <HideAppBar>
+    <ThemeProvider theme={darkMode?darkTheme:lightTheme}>
+      <HideAppBar switch={<Switch checked={darkMode} onClick={()=>setDarkMode(!darkMode)}/>}>
         <Grid item xs={12}>
-          <Hidden only={['sm','md','lg']}>
+          <Hidden only={['sm','md','lg','xl']}>
             <ButtonGroup variant="text" fullWidth={true}>
-              <Button disabled={!clicked} variant='contained' color='primary' onClick={()=>setClicked(false)}>
+              <Button disabled={!clicked} variant={"contained"} color='primary' onClick={()=>setClicked(false)}>
                 PLAYERS
               </Button>
-              <Button disabled={clicked} variant='contained' color='primary' onClick={()=>setClicked(true)}>
+              <Button disabled={clicked} variant={"contained"} color='primary' onClick={()=>setClicked(true)}>
                 TEAMS
               </Button>
             </ButtonGroup>
@@ -86,5 +89,3 @@ const App = ()=>{
     </ThemeProvider>
   )
 }
-
-export default App
