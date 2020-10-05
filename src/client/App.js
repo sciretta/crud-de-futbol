@@ -22,26 +22,24 @@ const teamsURL = 'http://localhost:4000/api/teams'
 const darkTheme = createMuiTheme({
   palette:{
     background:{
-      paper:blueGrey[500]
+      default:grey[900],
+      paper:blueGrey[600]
     },
     primary:{
-      main:blueGrey[100]
-    },
-    secondary:red
+      main:blueGrey[700]
+    }
   }
 })
 
 const lightTheme = createMuiTheme({
   palette:{
-    type:'light',
     background:{
-      default:'#fafafa',
-      paper:'#ffffff'
+      default:grey[200],
+      paper:grey[50]
     },
     primary:{
-      main:blueGrey[50]
-    },
-    secondary:red
+      main:blueGrey[400]
+    }
   }
 })
 
@@ -49,10 +47,13 @@ export default function App (){
   const [players,fetchPlayers] = useFetch(playersURL)
   const [teams,fetchTeams] = useFetch(teamsURL)
   const [clicked,setClicked] = useState(true)
-  const [darkMode,setDarkMode] = useState(false)
+  const [darkMode,setDarkMode] = useState(localStorage.getItem('DarkMode')==='true'?true:false)
+  localStorage.setItem('DarkMode',darkMode)
   return(
     <ThemeProvider theme={darkMode?darkTheme:lightTheme}>
-      <HideAppBar switch={<Switch checked={darkMode} onClick={()=>setDarkMode(!darkMode)}/>}>
+      <HideAppBar switch={
+        <Switch checked={darkMode} onClick={()=>setDarkMode(!darkMode)}/>
+      }>
         <Grid item xs={12}>
           <Hidden only={['sm','md','lg','xl']}>
             <ButtonGroup variant="text" fullWidth={true}>
@@ -69,7 +70,8 @@ export default function App (){
           <Hidden xsDown={clicked}>
             {
               players?
-              players.map(item =><FutCard key={item._id} item={{...item,tipo:'JUGADOR'}} URL={playersURL} fetchData={fetchPlayers}/>):
+              players.map(item =>
+                <FutCard key={item._id} item={{...item,tipo:'JUGADOR'}} URL={playersURL} fetchData={fetchPlayers}/>):
               [...new Array(3)].map((item,index)=><Loading key={index}/>)
             }
             <PlayerForm URL={playersURL} fetchData={fetchPlayers}/>
@@ -79,7 +81,8 @@ export default function App (){
           <Hidden xsDown={!clicked}>
             {
               teams?
-              teams.map(item =><FutCard key={item._id} item={{...item,tipo:'EQUIPO'}} URL={teamsURL} fetchData={fetchTeams}/>):
+              teams.map(item =>
+                <FutCard key={item._id} item={{...item,tipo:'EQUIPO'}} URL={teamsURL} fetchData={fetchTeams}/>):
               [...new Array(3)].map((item,index)=><Loading key={index}/>)
             }
             <TeamForm URL={teamsURL} fetchData={fetchTeams}/>

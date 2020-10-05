@@ -1,5 +1,4 @@
-import React from 'react'
-import {useState} from 'react'
+import React,{useState} from 'react'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -9,11 +8,9 @@ import SendIcon from '@material-ui/icons/Send'
 import handleSubmit from '../handles/handleSubmit'
 import FormWrapper from '../HOC/FormWrapper'
 
-function PlayerForm({URL,fetchData,classes}) {
+function PlayerForm({URL,fetchData,classes,error,setError}) {
   const { wrapPlayer,content,fields } = classes
-  const [ error,setError ] = useState(false)
   const [ posicion,setPosicion ] = useState('')
-
   return (
     <Card className={classes.wrapPlayer}>
       <CardContent className={content}>

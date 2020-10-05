@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography'
 import CssBaseline from '@material-ui/core/CssBaseline'
 import useScrollTrigger from '@material-ui/core/useScrollTrigger'
 import Slide from '@material-ui/core/Slide'
+import Paper from '@material-ui/core/Paper'
 import Grid from '@material-ui/core/Grid'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
@@ -26,26 +27,33 @@ const useStyles = makeStyles(theme=>({
     display:'flex',
     flexGrow:1,
     justifyContent:'center'
+  },
+  container:{
+    backgroundColor:theme.palette.background.default
   }
 }))
 
 export default function HideAppBar(props) {
-  const { root,title,wrap,background } = useStyles()
+  const { root,title,wrap,container } = useStyles()
   return (
     <>
       <CssBaseline />
       <HideOnScroll {...props}>
         <AppBar className={root}>
           <Toolbar>
-            <Typography className={title} variant={"h3"}>Crud de futbol</Typography>
+            <Typography className={title} variant={"h3"}>
+              Crud de futbol
+            </Typography>
             {props.switch}
           </Toolbar>
         </AppBar>
       </HideOnScroll>
       <Toolbar />
-      <Grid container spacing={3} justify={"center"}>
-        {props.children}
-      </Grid>
+      <Paper className={container}>
+        <Grid container spacing={3} justify={"center"}>
+          {props.children}
+        </Grid>
+      </Paper>
     </>
   )
 }

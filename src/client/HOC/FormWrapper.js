@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 
 const useStyles = makeStyles({
@@ -21,10 +21,11 @@ const useStyles = makeStyles({
   }
 })
 
-export default function (Component){
+export default function FormWrapper(Component){
 	return function (prevProps){
+    const [ error,setError ] = useState(false)
 		const classes = useStyles()
 		const {fetchData,URL} = prevProps
-    return <Component classes={classes} URL={URL} fetchData={fetchData}/>
+    return <Component error={error} setError={setError} classes={classes} URL={URL} fetchData={fetchData}/>
   }
 } 

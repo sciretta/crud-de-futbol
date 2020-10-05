@@ -7,8 +7,7 @@ import SendIcon from '@material-ui/icons/Send'
 import handleSubmit from '../handles/handleSubmit'
 import FormWrapper from '../HOC/FormWrapper'
 
-function TeamForm({URL,fetchData,classes}){
-  const [ error,setError ] = useState(false)
+function TeamForm({URL,fetchData,classes,error,setError}){
   const { wrapTeam,fields } = classes
   return (
     <Card className={classes.wrapTeam}>
